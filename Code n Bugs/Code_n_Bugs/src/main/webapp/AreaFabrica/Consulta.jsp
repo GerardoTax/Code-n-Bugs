@@ -1,6 +1,6 @@
 <%-- 
-    Document   : EmsamblarMueble
-    Created on : 27/08/2021, 12:32:28 AM
+    Document   : Consulta
+    Created on : 27/08/2021, 01:24:15 AM
     Author     : dell
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Consulta</h1>
     </body>
 </html>

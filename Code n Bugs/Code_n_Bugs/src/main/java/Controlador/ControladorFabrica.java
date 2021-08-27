@@ -35,13 +35,18 @@ public class ControladorFabrica extends HttpServlet {
             String accion=request.getParameter("accion");
         switch (accion) {
             case "Emsamblar":
-                request.getRequestDispatcher("/Ventanas/EmsamblarMueble.jsp").forward(request, response);
+                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
                 
-                break;
+            break;
+            case "Registrar":
+                request.getRequestDispatcher("/AreaFabrica/RegistrarMueble.jsp").forward(request, response);
+                
+            break;
             default:
+                
                
         }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
         }
         
     }

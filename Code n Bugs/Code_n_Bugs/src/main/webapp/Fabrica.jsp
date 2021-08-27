@@ -24,14 +24,14 @@
                             <a style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Emsamblar"  target="ventaFormularios">Emsamblar muebles</a>
                         </li>
                         <li class="nav-item">
-                        <a  style="border: none " class="btn btn-outline-secondary" href="#">Registrar muebles </a>
+                        <a  style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Registrar" target="ventaFormularios">Registrar muebles </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a style="border: none" class="btn btn-outline-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Consulta
                              </a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Consultar Informacion de Piezas</a>
+                                <a class="dropdown-item" href="ControladorFabrica?accion=consulta" target="ventaFormularios">Consultar Informacion de Piezas</a>
                                 <a class="dropdown-item" href="#">Consultar Informacion de Muebles</a>
                              </div>
                         </li>
