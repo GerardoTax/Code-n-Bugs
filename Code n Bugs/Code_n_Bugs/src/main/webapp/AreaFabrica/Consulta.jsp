@@ -11,7 +11,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="/Recursos/PaquetesLinck.jsp"/>
     <body>
-        <h1>Consulta</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <%
+                            
+                        for (int i=0; i<10; i++) {
+                                out.print("Id:" );
+                                out.print("<br />");
+                                //out.print("<a href='DetailsServlet?id=""'>");
+                                out.print("Resultado: " );
+                                out.print("<a />");
+                                out.print("<br />");
+                                out.print("<br />");
+                            }
+                    %>
+                </div>
+            </div>
+            
+        </div>
     </body>
 </html>

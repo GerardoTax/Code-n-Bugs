@@ -12,14 +12,14 @@
     </head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <body>
-       <nav class="navbar navbar-expand-lg navbar-light bg-info" style="background-color: #e3f2fd;">
+       <nav class="navbar navbar-expand-lg navbar-light bg-info" >
           <div class="container-fluid">
              <a class="navbar-brand" href="#">AREA DE FABRICA</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
              </button>
                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-3 mb-lg-0">
                         <li class="nav-item">
                             <a style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Emsamblar"  target="ventaFormularios">Emsamblar muebles</a>
                         </li>
@@ -31,8 +31,8 @@
                                 Consulta
                              </a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="ControladorFabrica?accion=consulta" target="ventaFormularios">Consultar Informacion de Piezas</a>
-                                <a class="dropdown-item" href="#">Consultar Informacion de Muebles</a>
+                                <a class="dropdown-item" href="ControladorFabrica?accion=Consulta" target="ventaFormularios">Consultar Informacion de Piezas</a>
+                                <a class="dropdown-item" href="ControladorFabrica?accion=Consulta" target="ventaFormularios">Consultar Informacion de Muebles</a>
                              </div>
                         </li>
                         <li class="nav-item">
@@ -43,25 +43,23 @@
                               Piezas
                            </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" href="#">Crear</a>
-                                 <a class="dropdown-item" href="#">Eliminar</a>
-                                 <a class="dropdown-item" href="#">Modificar</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a class="dropdown-item" href="#">Something else here</a>
+                                 <a class="dropdown-item" href="ControladorFabrica?accion=Pieza" target="ventaFormularios">Crear</a>
+                                 <a class="dropdown-item" href="ControladorFabrica?accion=EliminarModificarPieza" target="ventaFormularios">Eliminar y Modificar</a>
                              </div>
                         </li>
                
                     </ul>
                     </div>
-                        <div class="btn-group" role="group">
+                        <div class="btn-group text-center" role="group"  >
                             <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ${usuario.getUsuario()}
+                            Usuario:   ${usuario.getUsuario()}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                               <a class="dropdown-item" href="#">${usuario.getUsuario()}</a>
                               <a class="dropdown-item" href="Login.jsp">Cerrar Sesion</a>
                             </div>
                         </div>
+                              
              </div>
         </nav>
           <div class="m-4" style="height: 550px;" >

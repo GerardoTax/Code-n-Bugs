@@ -9,6 +9,7 @@ package DB;
 import CargaDatos.Constructor;
 import Conexcion.Conexcion;
 import Modelo.Mueble;
+import Modelo.PiezasMadera;
 import Modelo.Usuario;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -80,6 +81,15 @@ public class GenericaDB<T> {
                 }
             }         
                 break;
+            case "PIEZA":
+            {
+                try {
+                    nuevoObjeto= new PiezasMadera(rs.getInt("cantidad"),rs.getString("tipo_pieza"),rs.getDouble("precio"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(GenericaDB.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }         
+                break;    
         }
         return nuevoObjeto;
     }

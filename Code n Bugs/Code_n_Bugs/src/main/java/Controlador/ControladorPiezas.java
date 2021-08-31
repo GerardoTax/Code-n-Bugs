@@ -5,9 +5,17 @@
  */
 package Controlador;
 
+import Conexcion.Conexcion;
+import DB.PiezaDB;
+import ManejadorUtilidades.ExcepcionCampos;
 import ManejadorUtilidades.VerificarCampos;
+import Modelo.PiezasMadera;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-@WebServlet(name = "ControladorFabrica", urlPatterns = {"/ControladorFabrica"})
-public class ControladorFabrica extends HttpServlet {
+@WebServlet(name = "ControladorPiezas", urlPatterns = {"/ControladorPiezas"})
+public class ControladorPiezas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,37 +40,7 @@ public class ControladorFabrica extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String accion=request.getParameter("accion");
-        switch (accion) {
-            case "Emsamblar":
-                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
-                
-            break;
-            
-            case "Registrar":
-                request.getRequestDispatcher("/AreaFabrica/RegistrarMueble.jsp").forward(request, response);
-                
-            break;
-            
-            case "Consulta":
-                request.getRequestDispatcher("/AreaFabrica/Consulta.jsp").forward(request, response);
-                
-            break;
-            case "Pieza":
-                request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
-                
-            break;
-            case "EliminarModificarPieza":
-                request.getRequestDispatcher("/AreaFabrica/EliminarModificarPieza.jsp").forward(request, response);
-                
-            break;
-            default:
-                
-               
-        }
-        } catch (NumberFormatException e) {
-        }
+       
         
     }
 
@@ -93,9 +71,44 @@ public class ControladorFabrica extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            
-        
-        
             
+            String crear=request.getParameter("buton");
+             
+           
+            if (crear.equals("Guardar")){
+                VerificarCampos cam=new VerificarCampos(); 
+                String tipo= request.getParameter("tipoPieza");
+                PiezasMadera piezas=new PiezasMadera(); 
+                PiezaDB DB=new PiezaDB();
+                try {          
+                  int  cantidad=cam.convertir(request.getParameter("cantidadUnidad"));
+                  double precio=cam.convertirdouble(request.getParameter("costoUnidad"));
+                   piezas=DB.verificar(tipo); 
+                   if(piezas.getTipo().equals(tipo)){
+
+                         int piezastotal=piezas.getCanidad()+cantidad;
+                         double precioDB=piezas.getCanidad()*piezas.getPrecio();
+                         double precionuevo=cantidad*precio;
+                         double nuevoPrecio=(precioDB+precionuevo)/piezastotal;
+                         Statement Update=Conexcion.getConecion().createStatement();
+                         Update.executeLargeUpdate( "UPDATE materia_prima SET cantidad ='"+piezastotal+ " ', precio= '"+nuevoPrecio+"'  WHERE tipo_pieza = '"+tipo+"'");
+
+                    }
+                
+                } catch (Exception e) {
+                try {
+                    int  cantidad=cam.convertir(request.getParameter("cantidadUnidad"));
+                    double precio=cam.convertirdouble(request.getParameter("costoUnidad"));
+                    Statement insert=Conexcion.getConecion().createStatement();
+                    insert.executeLargeUpdate("INSERT INTO materia_prima VALUES("+cantidad+",'"+tipo+"',"+precio+")");
+                    
+                } catch (Exception ex) {
+                        response.sendRedirect("/Recursos/PaginaError.jsp");
+                }
+            
+            }
+        }
+ 
     }
 
     /**
@@ -105,6 +118,8 @@ public class ControladorFabrica extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
+        
+        
         return "Short description";
     }// </editor-fold>
 

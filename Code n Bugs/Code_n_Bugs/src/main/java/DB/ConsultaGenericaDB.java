@@ -6,6 +6,7 @@
 package DB;
 
 import Conexcion.Conexcion;
+import Modelo.Mueble;
 import Modelo.Usuario;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -20,24 +21,32 @@ public class ConsultaGenericaDB<T> {
     
     
     
-    public Object selectRows (String query, Class clase,String campo){
-        Object consulta=null;
-             try {
+     public Object selectRows (String query, Class clase,String campo){
+        Object nuevo=null;
+        try {
             Statement sentence = Conexcion.getConecion().createStatement();
             ResultSet rs=sentence.executeQuery(query);
             while (rs.next()){
              
-                Object  nuevoObjeto =GenericaDB.construir(rs, campo);
+                 nuevo=GenericaDB.construir(rs, campo);
                 
             }
            rs.close();
          } catch (Exception e) {
             System.out.println("Error :): " + e.getMessage());
         }
-        return consulta;
-    
-    }
+         return nuevo;
+     }
+     
+      public static void  ingresarMuebles(String nombre, double precio){
+        try {
+            Statement insert=Conexcion.getConecion().createStatement();
+                Mueble nuevoMueble= new Mueble(nombre,precio);
+              insert.executeLargeUpdate("INSERT INTO mueble VALUES('"+nuevoMueble.getNombre()+"','"+nuevoMueble.getPrecio()+"')");
+        } catch (Exception e) {
+            System.out.println("ERROR"+e);
+        }
         
-  
+    }
     
 }
