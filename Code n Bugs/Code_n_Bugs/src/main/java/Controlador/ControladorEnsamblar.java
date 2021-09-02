@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import DB.UsuarioDB;
-import Modelo.Usuario;
+import DB.GenericaDB;
+import Modelo.EnsamblePiezas;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-@WebServlet(name = "Validar", urlPatterns = {"/Validar"})
+@WebServlet(name = "ControladorEnsamblar", urlPatterns = {"/ControladorEnsamblar"})
+public class ControladorEnsamblar extends HttpServlet {
 
-public class Validar extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,10 +40,10 @@ public class Validar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Validar</title>");            
+            out.println("<title>Servlet ControladorEnsamblar</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Validar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorEnsamblar at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +61,10 @@ public class Validar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            
+            
+           
+             
     }
 
     /**
@@ -75,41 +78,43 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                Usuario nuevo=new Usuario();
-                UsuarioDB nuevoDB = new UsuarioDB();
-        
-         try {
-                 String usu=request.getParameter("usuario");
-                 String cla=request.getParameter("clave");
-                 int tipo=Integer.valueOf(request.getParameter("tipo"));
-                 nuevo=nuevoDB.verificar(usu,cla,tipo);
-                 request.setAttribute("usuario", nuevo);
-                 
-               if(nuevo.getUsuario() !=null){
-                   int var=nuevo.getTipo();
-                   switch (var) {
-                        case 1:
-                           request.getRequestDispatcher("Fabrica.jsp").forward(request, response);
-                           break;
-                        case 2:
-                           request.getRequestDispatcher("Ventas.jsp").forward(request, response);
-                           break;
-                        case 3:
-                           request.getRequestDispatcher("Administrativa.jsp").forward(request, response);
-                           break;      
-                       default:
-                           throw new AssertionError();
-                   }
-                   
-               }  
-               else {
-                   request.getRequestDispatcher("Login.jsp").forward(request, response);
-               }
-        } catch (Exception e) {
+          
+            String mueble=request.getParameter("mueble");
+            String estado=request.getParameter("accion");
+            
+            String usu =request.getParameter("valor");
+            EnsamblePiezas nu= new EnsamblePiezas(); 
+            GenericaDB<EnsamblePiezas> Db= new GenericaDB<EnsamblePiezas>();
+            
+            switch (estado) {
+            case "buscar":
+                try {
+                ArrayList<EnsamblePiezas> info;
+                info=  (ArrayList<EnsamblePiezas>)Db.selectRows("SELECT* FROM emsamble_piezas WHERE mueble='"+mueble+"'",nu.getClass(),"ENZAMBLEPIEZA");
+                request.setAttribute("lista", info);
+                request.setAttribute("t",usu);
+                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
+              
+            } catch (Exception e) {
+                request.getRequestDispatcher("/Recursos/PaginaError.jsp").forward(request, response);
+            }   
+                
+                
+                break;
+            case "guardar":
+                     String pieza=request.getParameter("pieza");
+                     request.setAttribute("nombre",mueble);
+                     request.setAttribute("nombrepieza",pieza);
+                    
+                    request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
+                
+                break;
+            default:
+                throw new AssertionError();
         }
             
-               
             
+             
     }
 
     /**

@@ -38,7 +38,7 @@
                 <td><%=list.get(i).getTipo()%></td>
                  <td>Q<%=list.get(i).getPrecio()%></td> 
                 <th <button type="button" value="${list.get(i).getTipo()}"  name="Editar"  class="btn btn-secondary btn-lg">Editar</button></th>
-                <th> <a class="btn btn-outline-secondary" href=ControladorPiezas?menu=p" >Eliminar</th>
+                <th> <a class="btn btn-outline-secondary" href="ControladorPieza?=Eliminar&tipo=${list.get(i).getTipo()}" >Eliminar</th>
             </tr>
                 <%
                      }

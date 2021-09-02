@@ -40,6 +40,36 @@ public class ControladorPiezas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+          String tipo=request.getParameter("menu");
+          
+           switch (tipo) {
+            case "Eliminar":
+                 try {
+                     String nom=request.getParameter("id");
+                      if(tipo.equals("Eliminar")){
+                            Statement eliminar=Conexcion.getConecion().createStatement();
+                            eliminar.executeLargeUpdate("DELETE FROM  materia_prima WHERE tipo_pieza='"+nom+"'");
+                            request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
+                        }  
+                }catch (Exception e) {
+                }
+                
+                break;
+                case "Editar":
+                   String nombre=request.getParameter("variable");
+                    PiezaDB db= new PiezaDB();
+                    try {
+                        PiezasMadera nu=db.verificar(nombre);
+                        request.setAttribute("llenar",nu);
+                        request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
+                    } catch (Exception e) {
+                    }
+                break;
+            default:
+                
+        }
+         
+          
        
         
     }
@@ -73,8 +103,6 @@ public class ControladorPiezas extends HttpServlet {
            
             
             String crear=request.getParameter("buton");
-             
-           
             if (crear.equals("Guardar")){
                 VerificarCampos cam=new VerificarCampos(); 
                 String tipo= request.getParameter("tipoPieza");
@@ -92,7 +120,8 @@ public class ControladorPiezas extends HttpServlet {
                          double nuevoPrecio=(precioDB+precionuevo)/piezastotal;
                          Statement Update=Conexcion.getConecion().createStatement();
                          Update.executeLargeUpdate( "UPDATE materia_prima SET cantidad ='"+piezastotal+ " ', precio= '"+nuevoPrecio+"'  WHERE tipo_pieza = '"+tipo+"'");
-
+                         request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
+                            
                     }
                 
                 } catch (Exception e) {
@@ -101,6 +130,7 @@ public class ControladorPiezas extends HttpServlet {
                     double precio=cam.convertirdouble(request.getParameter("costoUnidad"));
                     Statement insert=Conexcion.getConecion().createStatement();
                     insert.executeLargeUpdate("INSERT INTO materia_prima VALUES("+cantidad+",'"+tipo+"',"+precio+")");
+                    request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
                     
                 } catch (Exception ex) {
                         response.sendRedirect("/Recursos/PaginaError.jsp");
@@ -108,6 +138,20 @@ public class ControladorPiezas extends HttpServlet {
             
             }
         }
+         
+            else if (crear.equals("Actualizar")){
+             PiezaDB db= new PiezaDB();
+             VerificarCampos cam=new VerificarCampos(); 
+             String tipo= request.getParameter("tipoPieza");
+             try {
+                 int  cantidad=cam.convertir(request.getParameter("cantidadUnidad"));
+                 double precio=cam.convertirdouble(request.getParameter("costoUnidad"));
+                  db.actualizar(tipo,cantidad,precio);
+                  request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);
+             } catch (Exception e) {
+                 response.sendRedirect("/Recursos/PaginaError.jsp");
+             }
+         }   
  
     }
 

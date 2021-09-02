@@ -21,7 +21,7 @@
                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-3 mb-lg-0">
                         <li class="nav-item">
-                            <a style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Emsamblar"  target="ventaFormularios">Emsamblar muebles</a>
+                            <a style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Emsamblar&usuario=${usuario.getUsuario()}"  target="ventaFormularios">Emsamblar muebles</a>
                         </li>
                         <li class="nav-item">
                         <a  style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Registrar" target="ventaFormularios">Registrar muebles </a>
@@ -32,20 +32,15 @@
                              </a>
                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="ControladorFabrica?accion=Consulta" target="ventaFormularios">Consultar Informacion de Piezas</a>
-                                <a class="dropdown-item" href="ControladorFabrica?accion=Consulta" target="ventaFormularios">Consultar Informacion de Muebles</a>
+                                <a class="dropdown-item" href="ControladorFabrica?accion=ConsultaMueble" target="ventaFormularios">Consultar Informacion de Muebles</a>
                              </div>
                         </li>
                         <li class="nav-item">
                             <a  style="border: none" class="btn btn-outline-secondary" href="#">Piezas agotadas</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a style="border: none" class="btn btn-outline-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Piezas
-                           </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" href="ControladorFabrica?accion=Pieza" target="ventaFormularios">Crear</a>
-                                 <a class="dropdown-item" href="ControladorFabrica?accion=EliminarModificarPieza" target="ventaFormularios">Eliminar y Modificar</a>
-                             </div>
+                        
+                        <li class="nav-item">
+                        <a  style="border: none " class="btn btn-outline-secondary" href="ControladorFabrica?accion=Pieza" target="ventaFormularios">Piezas de Madera </a>
                         </li>
                
                     </ul>
@@ -56,14 +51,17 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                               <a class="dropdown-item" href="#">${usuario.getUsuario()}</a>
-                              <a class="dropdown-item" href="Login.jsp">Cerrar Sesion</a>
+                              <a class="dropdown-item" href="index.jsp">Cerrar Sesion</a>
                             </div>
                         </div>
                               
              </div>
         </nav>
+                                                
           <div class="m-4" style="height: 550px;" >
-              <iframe name="ventaFormularios" style="height: 100%; width: 100%"></iframe>
+              <iframe name="ventaFormularios" style="height: 100%; width: 100%; border: none"  >
+                   
+              </iframe>
                
                    </div>
       

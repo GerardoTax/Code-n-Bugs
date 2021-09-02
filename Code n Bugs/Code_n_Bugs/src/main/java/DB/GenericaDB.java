@@ -8,6 +8,7 @@ package DB;
 
 import CargaDatos.Constructor;
 import Conexcion.Conexcion;
+import Modelo.EnsamblePiezas;
 import Modelo.Mueble;
 import Modelo.PiezasMadera;
 import Modelo.Usuario;
@@ -89,7 +90,16 @@ public class GenericaDB<T> {
                     Logger.getLogger(GenericaDB.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }         
-                break;    
+             break; 
+             case "ENZAMBLEPIEZA":
+            {
+                try {
+                    nuevoObjeto= new EnsamblePiezas(rs.getString("mueble"),rs.getString("pieza"),rs.getInt("cantidad"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(GenericaDB.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }    
+            break;    
         }
         return nuevoObjeto;
     }
@@ -98,5 +108,7 @@ public class GenericaDB<T> {
         int valor =Integer.valueOf(campo);
         return valor;
     }
-     
+    
+  
+  
 }

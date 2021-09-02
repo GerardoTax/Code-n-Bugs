@@ -1,11 +1,13 @@
 <%-- 
-    Document   : Consulta
-    Created on : 27/08/2021, 01:24:15 AM
+    Document   : ConsultaMuebles
+    Created on : 1/09/2021, 12:20:19 PM
     Author     : dell
 --%>
 
-<%@page import="DB.GenericaDB"%>
-<%@page import="Modelo.PiezasMadera"%>
+<%@page import="DB.MuebleDB"%>
+<%@page import="Modelo.Mueble"%>
+<%@page import="Modelo.Mueble"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +18,7 @@
     </head>
     <jsp:include page="/Recursos/PaquetesLinck.jsp"/>
     <body>
-        <div class="col-sm-8">
+         <div class="col-sm-8">
                     
                      <table class="table table-success table-striped">
         <thead>
@@ -29,28 +31,26 @@
         </div>
         </div>
         <tr>
-            <th scope="col">Productos en existencia </th>
-            <th scope="col">Tipo de  pieza</th>
+            <th scope="col">Mueble </th>
+            <th scope="col">otros</th>
             <th scope="col">Precio por unidad </th>
         </tr>
         </thead>
         <tbody>
              <tr>
-                <% 
-                    ArrayList<PiezasMadera> list; 
-                    PiezasMadera pieza=new PiezasMadera();
-                    GenericaDB<PiezasMadera> listaPiezas= new GenericaDB<PiezasMadera>();
-                    list= (ArrayList<PiezasMadera>) listaPiezas.selectRows("SELECT* FROM materia_prima", pieza.getClass(),"PIEZA");
-
-                    for( PiezasMadera piezasMadera: list){
-                %>
-                 <td><%= piezasMadera.getCanidad() %></td>
-                <td><%= piezasMadera.getTipo() %></td>
-                 <td>Q<%=piezasMadera.getPrecio() %></td> 
+                <%
+                try{
+                ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
+                for( Mueble mueble :lista){    
+            %>  
+                 <td><%= mueble.getNombre() %></td>
+                 <td><%= mueble.getPrecio() %></td>
                  
             </tr>
                 <%
-                     }
+                  }
+                    }catch(Exception e){
+                    }
                 %>
                
         </tbody>

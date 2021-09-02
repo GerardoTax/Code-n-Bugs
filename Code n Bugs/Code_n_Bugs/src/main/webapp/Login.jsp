@@ -13,14 +13,23 @@
     </head>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <body> 
+        <nav class="navbar navbar-expand-lg navbar-light bg-info" >
+        <div class="container-fluid"> 
+           <div class="container-fluid">
+             <a class="navbar-brand" href="#">Muebleria code n' bugs</a>
+           </div>
+        </div>
+           <div class="nav-item">
+           <a href="index.jsp" class="btn btn-secondary">Regresar a la tienda</a>
+           </di> 
+        </nav>
         <div class="container mt-4 col-lg-4">
             <div class="card col-sm-10">
                 <div class="card-body">
                     <form class="form-sign" action="Validar" method="POST">
                         <div class="form-group text-center">
-                            <h3>Login</h3>
-                            <label>Bien venidos al sistema</label>
-                            <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F44%2F44948.png&imgrefurl=https%3A%2F%2Fwww.flaticon.es%2Ficono-gratis%2Fsimbolo-de-usuario-masculino-negro_44948&tbnid=Abzciaagz1e1wM&vet=12ahUKEwiQjtrju9DyAhUED98KHU8GAccQMygoegUIARCgAg..i&docid=nq3U5Q7VH0da2M&w=512&h=512&q=iconos%20de%20usuario&hl=es&ved=2ahUKEwiQjtrju9DyAhUED98KHU8GAccQMygoegUIARCgAg" class="rounded float-left" alt="250">
+                            <h3>Bienvenido a la Mubleria</h3>
+                            <img src="Imagenes/iconoUsuario.png"  width="140" height="120"/>
                         </div>
                         <div class="form-group">
                             <label>Usuario</label>
@@ -46,6 +55,8 @@
                 </div>
             </div>
         </div> 
+        </div>
+       
     </body>
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

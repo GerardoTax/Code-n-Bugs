@@ -4,6 +4,11 @@
     Author     : dell
 --%>
 
+<%@page import="Modelo.EnsamblePiezas"%>
+<%@page import="DB.MuebleDB"%>
+<%@page import="Modelo.Mueble"%>
+<%@page import="Modelo.Mueble"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,23 +20,81 @@
     </head>
     <body>
         <h1>Bien venido a !</h1>
-        <form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-   
+        <div class="d-flex">
+             
+            <div class="card col-sm-4">
+                <form class="form-sign" action="ControladorEnsamblar" method="post">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Muble a enzamblar</label>
+                       <div>
+                           <select name="mueble" class="custom-select custom-select-lg mb-3">
+                           <%  try{
+                                    ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
+                                    for(Mueble mueble: lista){ 
+                               %>
+                            
+                                <option value="<%= mueble.getNombre() %>" name="muebleEnsamblar"> <%= mueble.getNombre() %></option>
+                                <%
+                                }}catch(Exception e){} 
+                            %>
+                            </select>
+                            <div>
+                                <label> Usuario</label>
+                                <%
+                                    String usu =request.getParameter("valor");
+                                    
+                                    %>
+                                    <label name="nombreUsuario" value="<%= usu%>" class=" form-control">${t}</label>
+                                    <input required type="text" value="<%= usu%>" name="p" class=" form-control">
+                                    
+                                    
+                            </div>
+                            
+                            <div>
+                                 
+                                 <input type="date" name="fecha" min="2018-03-25" max="2018-05-25" step="2"/>
+                            </div>     
+
+                                 
+                            </div>
+                        </div>  
+                            <button  type="submit" value="buscar" name="accion"class="btn btn-primary">Bucar piezas necesarias</button>
+                            <button  type="submit" value="guardar" name="accion"class="btn btn-primary">Ensamblar mueble</button>
+                  </form>
+                <div> 
+                    <br>
+                     <table class="table table-success table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Mueble a ensamblar</th>
+                            <th scope="col">piezas necesarias</th>
+                            <th scope="col">cantidad de piezas necesarias</th>
+                          </tr>
+                        </thead>
+                        <%
+                            try{ 
+                            ArrayList<EnsamblePiezas> list=(ArrayList<EnsamblePiezas>) request.getAttribute("lista");
+                             for(EnsamblePiezas ensable: list )
+                             {
+                            %>
+                        <tbody>
+                          <tr>
+                            <td><%= ensable.getNombreMueble() %></td>
+                            <td value="<%=ensable.getPieza()%>" name="pieza" ><%=ensable.getPieza()%></td>
+                            <td value="<%=ensable.getCantidad()%>"><%=ensable.getCantidad()%></td>
+                          </tr>
+                          <%
+                              }
+                            } catch(Exception e){
+                            }
+
+                          %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>            
     </body>
 
 </html>

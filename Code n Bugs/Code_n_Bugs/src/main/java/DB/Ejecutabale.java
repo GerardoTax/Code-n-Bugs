@@ -33,7 +33,18 @@ public class Ejecutabale {
             PiezasMadera pieza=new PiezasMadera();
             GenericaDB<PiezasMadera> listaPiezas= new GenericaDB<PiezasMadera>();
             list= (ArrayList<PiezasMadera>) listaPiezas.selectRows("SELECT* FROM materia_prima", pieza.getClass(),"PIEZA");
-        
+             
+           
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            
         
             /*  Usuario tmp=new Usuario();
             GenericaDB<Usuario> DB=new GenericaDB<Usuario>();

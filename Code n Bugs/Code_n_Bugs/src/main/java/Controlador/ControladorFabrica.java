@@ -34,9 +34,12 @@ public class ControladorFabrica extends HttpServlet {
             throws ServletException, IOException {
         try {
             String accion=request.getParameter("accion");
+            String usu=request.getParameter("usuario");
+            
         switch (accion) {
             case "Emsamblar":
-                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
+                
+                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp?valor="+usu).forward(request, response);
                 
             break;
             
@@ -45,9 +48,12 @@ public class ControladorFabrica extends HttpServlet {
                 
             break;
             
-            case "Consulta":
-                request.getRequestDispatcher("/AreaFabrica/Consulta.jsp").forward(request, response);
-                
+            case "Consulta":      
+                 request.getRequestDispatcher("/AreaFabrica/Consulta.jsp").forward(request, response);
+                 
+            break;
+            case "ConsultaMueble":
+                    request.getRequestDispatcher("/AreaFabrica/ConsultaMuebles.jsp").forward(request, response);
             break;
             case "Pieza":
                 request.getRequestDispatcher("/AreaFabrica/Piezas.jsp").forward(request, response);

@@ -6,7 +6,9 @@
 package DB;
 
 import Conexcion.Conexcion;
+import ManejadorUtilidades.VerificarCampos;
 import Modelo.PiezasMadera;
+import Modelo.Usuario;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -34,4 +36,15 @@ public class PiezaDB {
            
         return nuevot;
     }
+     
+     public void actualizar(String tipo, int cantidad, double precio){
+           
+         try {   
+                Statement Update=Conexcion.getConecion().createStatement();
+                Update.executeLargeUpdate( "UPDATE materia_prima SET cantidad ='"+cantidad+" ', precio= '"+precio+"'  WHERE tipo_pieza = '"+tipo+"'");
+         } catch (Exception e) {
+         }
+             
+     
+     }
 }
