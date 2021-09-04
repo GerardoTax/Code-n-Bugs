@@ -16,46 +16,50 @@
     </head>
     <jsp:include page="/Recursos/PaquetesLinck.jsp"/>
     <body>
-        <div class="col-sm-8">
-                    
-                     <table class="table table-success table-striped">
-        <thead>
-        <h2 align="center" > Consulta de tabla </h2>
-        <div align="center">
-        <a class="btn btn-outline-secondary" href="#">Ordenar de mayor a menor</a>
-        <a class="btn btn-outline-secondary" href="#">Ordenar de menor a mayor</a>
-        <div>
-            
-        </div>
-        </div>
-        <tr>
-            <th scope="col">Productos en existencia </th>
-            <th scope="col">Tipo de  pieza</th>
-            <th scope="col">Precio por unidad </th>
-        </tr>
-        </thead>
-        <tbody>
-             <tr>
-                <% 
-                    ArrayList<PiezasMadera> list; 
-                    PiezasMadera pieza=new PiezasMadera();
-                    GenericaDB<PiezasMadera> listaPiezas= new GenericaDB<PiezasMadera>();
-                    list= (ArrayList<PiezasMadera>) listaPiezas.selectRows("SELECT* FROM materia_prima", pieza.getClass(),"PIEZA");
+       <div class="d-flex">
+            <div class="col-sm-8">
+                <form action="/ControladorConsulta" method="post">                 
+                   <table class="table table-success table-striped">
+                        <thead>
+                        <h2 align="center" > Consulta de informacion de Piezas </h2>
+                        <div align="center">
+                            <button  type="submit" value="menor" name="accion"class="btn btn-primary">Menor a Mayor</button>
+                            <button  type="submit" value="mayor" name="accion"class="btn btn-secondary">Mayor a Menor</button> 
 
-                    for( PiezasMadera piezasMadera: list){
-                %>
-                 <td><%= piezasMadera.getCanidad() %></td>
-                <td><%= piezasMadera.getTipo() %></td>
-                 <td>Q<%=piezasMadera.getPrecio() %></td> 
-                 
-            </tr>
-                <%
-                     }
-                %>
-               
-        </tbody>
-    </table>
-                    
-                </div>
+                            <br><br>
+                        </div>
+                        <tr>
+                            <th scope="col">Productos en existencia </th>
+                            <th scope="col">Tipo de  pieza</th>
+                            <th scope="col">Precio por unidad </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                <% 
+                                    try{
+                                           ArrayList<PiezasMadera> list=(ArrayList<PiezasMadera>) request.getAttribute("lista");
+                                           for(PiezasMadera piezasMadera: list ){
+
+                                %>
+                                <td><%= piezasMadera.getCanidad() %></td>
+                                <td><%= piezasMadera.getTipo() %></td>
+                                <td>Q<%=piezasMadera.getPrecio() %></td> 
+                            </tr>
+                                <%
+                                            }
+                                    }catch(Exception e){
+
+                                    }
+                                %>
+                        </tbody>
+
+                     </table>     
+                </form>   
+            </div>
+            <div class="col-7 sm-5">
+                <img src="../Imagenes/mesaMadera.jpg" alt=""/>
+            </div>            
+        </div>       
     </body>
 </html>

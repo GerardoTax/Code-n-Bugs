@@ -76,7 +76,7 @@ public class GenericaDB<T> {
             case "MUEBLE":
             {
                 try {
-                    nuevoObjeto= new Mueble(rs.getString("nombre"),rs.getDouble("precio"));
+                    nuevoObjeto= new Mueble(rs.getString("nombre"),rs.getDouble("precio"),rs.getInt("muebles_disponibles"));
                 } catch (SQLException ex) {
                     Logger.getLogger(GenericaDB.class.getName()).log(Level.SEVERE, null, ex);
                 }

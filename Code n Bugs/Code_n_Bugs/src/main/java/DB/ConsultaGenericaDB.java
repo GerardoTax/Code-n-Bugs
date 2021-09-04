@@ -38,10 +38,10 @@ public class ConsultaGenericaDB<T> {
          return nuevo;
      }
      
-      public static void  ingresarMuebles(String nombre, double precio){
+      public static void  ingresarMuebles(String nombre, double precio, int cant){
         try {
             Statement insert=Conexcion.getConecion().createStatement();
-                Mueble nuevoMueble= new Mueble(nombre,precio);
+                Mueble nuevoMueble= new Mueble(nombre,precio,cant);
               insert.executeLargeUpdate("INSERT INTO mueble VALUES('"+nuevoMueble.getNombre()+"','"+nuevoMueble.getPrecio()+"')");
         } catch (Exception e) {
             System.out.println("ERROR"+e);

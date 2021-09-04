@@ -15,7 +15,7 @@ public class VerificarCampos {
          
          try{
             int tipo=Integer.valueOf(valor);
-               if(tipo<1){
+               if(tipo<0 ){
                      throw new ExcepcionCampos("Error en el"+valor+ "campo  esta intentando ingresar un mumero negativo");  
                 } 
                else {
@@ -33,7 +33,7 @@ public class VerificarCampos {
          
          try{
             double precio=Double.parseDouble(valor);
-               if(precio<1){
+               if(precio<0){
                      throw new ExcepcionCampos("Error en el"+valor+ "campo  esta intentando ingresar un mumero negativo");  
                 } 
                else {

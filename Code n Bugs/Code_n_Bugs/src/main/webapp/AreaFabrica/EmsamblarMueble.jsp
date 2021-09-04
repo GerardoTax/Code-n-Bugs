@@ -4,6 +4,7 @@
     Author     : dell
 --%>
 
+<%@page import="Modelo.PiezasMadera"%>
 <%@page import="Modelo.EnsamblePiezas"%>
 <%@page import="DB.MuebleDB"%>
 <%@page import="Modelo.Mueble"%>
@@ -12,21 +13,61 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <%                    //String b=request.getParameter("valor");
+            String usu =request.getParameter("valor");
+           // if(usu.equals(null)){
+             //                         usu=b;
+            //}  
+                                 
+                                
+        %>
+        <head>
      
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <jsp:include page="/Recursos/PaquetesLinck.jsp" />
         <title>JSP Page</title>
     </head>
     <body>
+        
+
         <h1>Bien venido a !</h1>
+         
+                 
         <div class="d-flex">
              
-            <div class="card col-sm-4">
+                <div class="card col-4 sm-7">
+                    <div>
+                        <h2  >Ensamblar mueble</h2>
+                    </div>
+                    <div>
+                        <labe>Usuario:</labe>
+                        <input readonly=readonly required type="text" value="${usuarioCrear}" name="p" class=" form-control"><br>
+                        <labe>Mueble a ensamblar</labe>
+                        <input readonly=readonly required type="text" value="${selec}" name="p" class=" form-control"><br>
+                        <labe>Fecha de ensamble:</labe><br><br>
+                        <input type="date" name="fecha" min="2018-03-25" max="2025-05-25" step="2"/><br><br>
+                        <button  type="submit" value="guardar" name="accion"class="btn btn-primary">Ensamblar mueble</button><br>
+                        <%
+                          try{ 
+                            ArrayList<PiezasMadera> l=(ArrayList<PiezasMadera>) request.getAttribute("pita");
+                             for(PiezasMadera nuPiezasMadera: l ){
+                        %>
+                        <input readonly=readonly required type="text" value="<%=nuPiezasMadera.getTipo() %>" name="p" class=" form-control"><br>
+                        <%
+                                }
+                            }catch(Exception e){}
+                            %>
+                    </div>
+                            
+                            
+                </div>   
+                <div class="card col-sm-8">
                 <form class="form-sign" action="ControladorEnsamblar" method="post">
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Muble a enzamblar</label>
-                       <div>
+                      <div> 
+                      <div class="mb-3">
+
                            <select name="mueble" class="custom-select custom-select-lg mb-3">
                            <%  try{
                                     ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
@@ -38,30 +79,18 @@
                                 }}catch(Exception e){} 
                             %>
                             </select>
-                            <div>
-                                <label> Usuario</label>
-                                <%
-                                    String usu =request.getParameter("valor");
-                                    
-                                    %>
-                                    <label name="nombreUsuario" value="<%= usu%>" class=" form-control">${t}</label>
-                                    <input required type="text" value="<%= usu%>" name="p" class=" form-control">
-                                    
-                                    
-                            </div>
-                            
-                            <div>
-                                 
-                                 <input type="date" name="fecha" min="2018-03-25" max="2018-05-25" step="2"/>
-                            </div>     
-
-                                 
-                            </div>
-                        </div>  
                             <button  type="submit" value="buscar" name="accion"class="btn btn-primary">Bucar piezas necesarias</button>
-                            <button  type="submit" value="guardar" name="accion"class="btn btn-primary">Ensamblar mueble</button>
-                  </form>
-                <div> 
+                            
+                        </div>
+                            <div class="mb-8">
+                            <input readonly=readonly required type="text" value="<%=usu%>" name="usuarioIngrese" class=" form-control">
+                            </div>
+                      </div>      
+                           
+                        </div class="mb-3">  
+                            <button  type="submit" value="buscar" name="accion"class="btn btn-primary">Bucar piezas necesarias</button>
+                            
+                   <div> 
                     <br>
                      <table class="table table-success table-striped">
                         <thead>
@@ -81,7 +110,10 @@
                           <tr>
                             <td><%= ensable.getNombreMueble() %></td>
                             <td value="<%=ensable.getPieza()%>" name="pieza" ><%=ensable.getPieza()%></td>
-                            <td value="<%=ensable.getCantidad()%>"><%=ensable.getCantidad()%></td>
+                            <input readonly=readonly required type="text" value="<%=ensable.getPieza()%>" name="" class=" form-control"><br>
+                            
+                            <td value="<%=ensable.getCantidad()%>" name="cantidad"><%=ensable.getCantidad()%></td>
+                            
                           </tr>
                           <%
                               }
@@ -92,9 +124,11 @@
                         </tbody>
                     </table>
                 </div>
+                </form>
             </div>
+                        
             </div>
-        </div>            
+                
     </body>
 
 </html>

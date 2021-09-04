@@ -96,7 +96,8 @@ public class Validar extends HttpServlet {
                            break;
                         case 3:
                            request.getRequestDispatcher("Administrativa.jsp").forward(request, response);
-                           break;      
+                           break;   
+                        
                        default:
                            throw new AssertionError();
                    }

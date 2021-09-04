@@ -29,7 +29,7 @@ public class MuebleDB {
             ResultSet rs = insert.executeQuery("SELECT * FROM mueble");
             while (rs.next()){
                 
-                Mueble nuevoMueble= new Mueble(rs.getString("nombre"),rs.getDouble("precio"));
+                Mueble nuevoMueble= new Mueble(rs.getString("nombre"),rs.getDouble("precio"),rs.getInt("muebles_disponibles"));
                // System.out.println(nuevoMueble.getNombre()+"----------------"+nuevoMueble.getPrecio());
                 listaMueble.add(nuevoMueble);
             }
@@ -41,11 +41,11 @@ public class MuebleDB {
         return listaMueble;
     }
     
-    public static void  ingresarMuebles(String nombre, double precio){
+    public static void  ingresarMuebles(String nombre, double precio, int cantidad){
         try {
             Statement insert=Conexcion.getConecion().createStatement();
-                Mueble nuevoMueble= new Mueble(nombre,precio);
-              insert.executeLargeUpdate("INSERT INTO mueble VALUES('"+nuevoMueble.getNombre()+"','"+nuevoMueble.getPrecio()+"')");
+                Mueble nuevoMueble= new Mueble(nombre,precio,cantidad);
+              insert.executeLargeUpdate("INSERT INTO mueble VALUES('"+nuevoMueble.getNombre()+"','"+nuevoMueble.getPrecio()+"','"+cantidad+"')");
         } catch (Exception e) {
             System.out.println("ERROR"+e);
         }

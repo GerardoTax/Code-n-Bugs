@@ -29,7 +29,7 @@ public class Conexcion {
             connection= DriverManager.getConnection(URL_MYSQL,USER,PASSWORD);
             System.out.println("Satisfacorio");
            
-     }catch (Exception e) {
+     }catch (ClassNotFoundException | SQLException e) {
            System.out.println("Erro------>"+e);
        
      }

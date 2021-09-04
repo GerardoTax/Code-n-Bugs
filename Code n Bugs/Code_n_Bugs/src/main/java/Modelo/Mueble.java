@@ -12,12 +12,22 @@ package Modelo;
 public class Mueble {
     private String nombre;
     private double precio;
+    private int mueblesDisponibles;
     
     public Mueble(){}
     
-    public Mueble(String nombre,double precio){
+    public Mueble(String nombre,double precio,int mueblesDisponibles){
         this.nombre=nombre;
         this.precio=precio;
+        this.mueblesDisponibles=mueblesDisponibles;
+    }
+
+    public int getMueblesDisponibles() {
+        return mueblesDisponibles;
+    }
+
+    public void setMueblesDisponibles(int mueblesDisponibles) {
+        this.mueblesDisponibles = mueblesDisponibles;
     }
 
     public String getNombre() {

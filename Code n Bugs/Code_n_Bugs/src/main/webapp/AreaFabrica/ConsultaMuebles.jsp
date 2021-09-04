@@ -18,44 +18,50 @@
     </head>
     <jsp:include page="/Recursos/PaquetesLinck.jsp"/>
     <body>
-         <div class="col-sm-8">
-                    
-                     <table class="table table-success table-striped">
-        <thead>
-        <h2 align="center" > Consulta de tabla </h2>
-        <div align="center">
-        <a class="btn btn-outline-secondary" href="#">Ordenar de mayor a menor</a>
-        <a class="btn btn-outline-secondary" href="#">Ordenar de menor a mayor</a>
-        <div>
-            
-        </div>
-        </div>
-        <tr>
-            <th scope="col">Mueble </th>
-            <th scope="col">otros</th>
-            <th scope="col">Precio por unidad </th>
-        </tr>
-        </thead>
-        <tbody>
-             <tr>
-                <%
-                try{
-                ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
-                for( Mueble mueble :lista){    
-            %>  
-                 <td><%= mueble.getNombre() %></td>
-                 <td><%= mueble.getPrecio() %></td>
-                 
-            </tr>
-                <%
-                  }
-                    }catch(Exception e){
-                    }
-                %>
-               
-        </tbody>
-    </table>
-                    
-                </div>
+         <div class="d-flex">
+            <div class="col-sm-8">
+                <form action="/ControladorConsulta" method="post">                 
+                   <table class="table table-success table-striped">
+                        <thead>
+                        <h2 align="center" > Consulta de informacion de Muebles </h2>
+                        <div align="center">
+                            <button  type="submit" value="menormueble" name="accion"class="btn btn-primary">Mayor a Menor</button>
+                            <button  type="submit" value="mayormueble" name="accion"class="btn btn-secondary">Menor a Mayor</button> 
+
+                            <br><br>
+                        </div>
+                        <tr>
+                            <th scope="col">Productos en existencia </th>
+                            <th scope="col">Tipo de  pieza</th>
+                            <th scope="col">Precio por unidad </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                <% 
+                                    try{
+                                           ArrayList<Mueble> list=(ArrayList<Mueble>) request.getAttribute("listamueble");
+                                           for(Mueble mueble: list ){
+
+                                %>
+                                <td><%= mueble.getMueblesDisponibles() %></td>
+                                <td><%= mueble.getNombre() %></td>
+                                <td>Q<%=mueble.getPrecio() %></td> 
+                            </tr>
+                                <%
+                                            }
+                                    }catch(Exception e){
+
+                                    }
+                                %>
+                        </tbody>
+
+                     </table>     
+                </form>   
+            </div>
+            <div class="col-7 sm-5">
+                <img src="../Imagenes/mesaMadera.jpg" alt=""/>
+            </div>            
+        </div>       
     </body>
 </html>

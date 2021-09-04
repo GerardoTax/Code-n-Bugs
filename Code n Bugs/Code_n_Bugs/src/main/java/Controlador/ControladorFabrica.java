@@ -67,7 +67,7 @@ public class ControladorFabrica extends HttpServlet {
                 
                
         }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
         }
         
     }

@@ -6,7 +6,9 @@
 package Controlador;
 
 import DB.GenericaDB;
+import DB.PiezaDB;
 import Modelo.EnsamblePiezas;
+import Modelo.PiezasMadera;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -81,8 +83,9 @@ public class ControladorEnsamblar extends HttpServlet {
           
             String mueble=request.getParameter("mueble");
             String estado=request.getParameter("accion");
-            
-            String usu =request.getParameter("valor");
+            String usu =request.getParameter("usuarioIngrese");
+            String pieza=request.getParameter("pieza");
+            String cantidad=request.getParameter("cantidad");
             EnsamblePiezas nu= new EnsamblePiezas(); 
             GenericaDB<EnsamblePiezas> Db= new GenericaDB<EnsamblePiezas>();
             
@@ -90,27 +93,34 @@ public class ControladorEnsamblar extends HttpServlet {
             case "buscar":
                 try {
                 ArrayList<EnsamblePiezas> info;
+                ArrayList<PiezasMadera> como;
                 info=  (ArrayList<EnsamblePiezas>)Db.selectRows("SELECT* FROM emsamble_piezas WHERE mueble='"+mueble+"'",nu.getClass(),"ENZAMBLEPIEZA");
+                como= ConsultarPiezas(info);
+               // request.setAttribute("pita",como);
                 request.setAttribute("lista", info);
-                request.setAttribute("t",usu);
-                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
+                request.setAttribute("selec",mueble);
+                request.setAttribute("s",pieza);
+                request.setAttribute("usuarioCrear", usu);
+                request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp?valor="+usu).forward(request, response);
               
             } catch (Exception e) {
                 request.getRequestDispatcher("/Recursos/PaginaError.jsp").forward(request, response);
+                System.out.println(e);
             }   
                 
                 
                 break;
             case "guardar":
-                     String pieza=request.getParameter("pieza");
-                     request.setAttribute("nombre",mueble);
-                     request.setAttribute("nombrepieza",pieza);
+                     
+                    // request.setAttribute("nombre",mueble);
+                    // request.setAttribute("nombrepieza",pieza);
                     
                     request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp").forward(request, response);
+                    
                 
                 break;
             default:
-                throw new AssertionError();
+            throw new AssertionError();
         }
             
             
@@ -127,4 +137,22 @@ public class ControladorEnsamblar extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+    public ArrayList<PiezasMadera>  ConsultarPiezas(ArrayList<EnsamblePiezas> info){
+            ArrayList<PiezasMadera> list = new  ArrayList<PiezasMadera>();
+            PiezaDB nueva= new PiezaDB();
+            try {
+            for(EnsamblePiezas enPieza: info ){
+                System.out.println(enPieza);
+                list.add(nueva.verificar(enPieza.getPieza()));
+                
+
+            }
+        } catch (Exception e) {
+        }
+            
+        return list;
+    }
+    
+    
 }

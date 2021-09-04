@@ -30,18 +30,22 @@
         <table border="0" width="1000" align="center">
             <%
                 try{
-                ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
+                ArrayList<Mueble> list= MuebleDB.obtenerMueble();
                 int saltoLinea=0;
-                for(int i=0; i<lista.size(); i++){    
+                for(Mueble mueble: list){    
             %>    
             
            
                 
             <th>
                 <br><br>
-                <%= lista.get(i).getNombre() %><br>
-                <%= "Q"+lista.get(i).getPrecio() %><br>
-                <a href="" class="btn btn-secondary">Añadir</a>      
+                <%= mueble.getNombre() %>
+                <br>
+                <%= "Q"+mueble.getPrecio() %><br>
+                
+                
+                <a href="" class="btn btn-secondary">Añadir</a><br>
+                No. existencia:<%= mueble.getMueblesDisponibles()%>
             </th>
           <%
               saltoLinea++;

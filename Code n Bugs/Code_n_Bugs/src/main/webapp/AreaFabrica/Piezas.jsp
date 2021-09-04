@@ -40,7 +40,7 @@
                         </div>
                         <div class="d-grid gap-2">
                             <input type="submit" name="buton" value="Guardar"  class="btn btn-secondary btn-block">
-                            <input type="submit" name="buton" value="Actualizar"  class="btn btn-secondary btn-block">
+                            <input type="submit" name="buton" value="Actualizar"  class="btn btn-primary btn-block">
                         </div>
                     </form>
                 </div>

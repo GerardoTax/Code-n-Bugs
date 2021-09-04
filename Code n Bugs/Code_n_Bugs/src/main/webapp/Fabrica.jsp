@@ -36,7 +36,7 @@
                              </div>
                         </li>
                         <li class="nav-item">
-                            <a  style="border: none" class="btn btn-outline-secondary" href="#">Piezas agotadas</a>
+                            <a  style="border: none" class="btn btn-outline-secondary" href="/AreaFabrica/EstadosPiezas.jsp" target="ventaFormularios">Piezas agotadas</a>
                         </li>
                         
                         <li class="nav-item">
