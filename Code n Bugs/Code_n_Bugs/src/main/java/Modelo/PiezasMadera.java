@@ -11,14 +11,14 @@ package Modelo;
  */
 public class PiezasMadera {
     private String tipo;
-    private int canidad;
+    private int cantidad;
     private double precio;
     
     public PiezasMadera(){}
 
-    public PiezasMadera( int canidad,String tipo, double precio) {
+    public PiezasMadera( int cantidad,String tipo, double precio) {
         this.tipo = tipo;
-        this.canidad = canidad;
+        this.cantidad = cantidad;
         this.precio = precio;
     }
 
@@ -30,12 +30,12 @@ public class PiezasMadera {
         this.tipo = tipo;
     }
 
-    public int getCanidad() {
-        return canidad;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCanidad(int canidad) {
-        this.canidad = canidad;
+    public void setCantidad(int canidad) {
+        this.cantidad = canidad;
     }
 
     public double getPrecio() {

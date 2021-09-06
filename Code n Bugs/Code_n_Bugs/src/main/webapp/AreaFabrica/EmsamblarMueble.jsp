@@ -62,13 +62,11 @@
                             
                 </div>   
                 <div class="card col-sm-8">
-                <form class="form-sign" action="ControladorEnsamblar" method="post">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Muble a enzamblar</label>
-                      <div> 
-                      <div class="mb-3">
-
-                           <select name="mueble" class="custom-select custom-select-lg mb-3">
+                    <form class="row g-3" action="ControladorEnsamblar" method="post">
+                        <br>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Mueble a ensamblar</label>
+                          <select name="mueble" class="custom-select custom-select-lg mb-3">
                            <%  try{
                                     ArrayList<Mueble> lista= MuebleDB.obtenerMueble();
                                     for(Mueble mueble: lista){ 
@@ -78,53 +76,46 @@
                                 <%
                                 }}catch(Exception e){} 
                             %>
-                            </select>
-                            <button  type="submit" value="buscar" name="accion"class="btn btn-primary">Bucar piezas necesarias</button>
-                            
+                           </select>
                         </div>
-                            <div class="mb-8">
-                            <input readonly=readonly required type="text" value="<%=usu%>" name="usuarioIngrese" class=" form-control">
-                            </div>
-                      </div>      
-                           
-                        </div class="mb-3">  
-                            <button  type="submit" value="buscar" name="accion"class="btn btn-primary">Bucar piezas necesarias</button>
-                            
-                   <div> 
-                    <br>
-                     <table class="table table-success table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">Mueble a ensamblar</th>
-                            <th scope="col">piezas necesarias</th>
-                            <th scope="col">cantidad de piezas necesarias</th>
-                          </tr>
-                        </thead>
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Usuario</label>
+                          <input readonly=readonly required type="text" value="<%=usu%>" name="usuarioIngrese" class=" form-control">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputZip" class="form-label">Fecha: </label>
+                            <input type="date" name="fecha" min="2018-03-25" max="2025-05-25" step="2"/><br><br>
+                        </div>
                         <%
                             try{ 
                             ArrayList<EnsamblePiezas> list=(ArrayList<EnsamblePiezas>) request.getAttribute("lista");
                              for(EnsamblePiezas ensable: list )
                              {
                             %>
-                        <tbody>
-                          <tr>
-                            <td><%= ensable.getNombreMueble() %></td>
-                            <td value="<%=ensable.getPieza()%>" name="pieza" ><%=ensable.getPieza()%></td>
-                            <input readonly=readonly required type="text" value="<%=ensable.getPieza()%>" name="" class=" form-control"><br>
-                            
-                            <td value="<%=ensable.getCantidad()%>" name="cantidad"><%=ensable.getCantidad()%></td>
-                            
-                          </tr>
-                          <%
+                        <div class="col-md-6">
+                          <label for="inputCity" class="form-label">Piezas</label>
+                          <input type="text" name="Piezas" value="<%= ensable.getPieza() %>" class="form-control" id="inputCity">
+                        </div>
+                        <div class="col-md-2">
+                          <label for="inputState" class="form-label">Cantidad</label>
+                          <input type="text" name="Cantidad" value="<%= ensable.getCantidad() %>" class="form-control" id="inputZip">
+                        </div>
+                        <div class="col-md-2">
+                          <label for="inputZip" class="form-label">precio</label>
+                          <input type="text" name="Precio" value="<%= ensable.getCantidad() %>" class="form-control" id="inputZip">
+                        </div>
+                        
+                             <%
                               }
                             } catch(Exception e){
                             }
 
                           %>
-                        </tbody>
-                    </table>
-                </div>
-                </form>
+                        <div class="col-12">
+                            <br>
+                          <button type="submit" value="buscar" name="accion" class="btn btn-primary">Bucar piezas</button>
+                        </div>
+                      </form>
             </div>
                         
             </div>

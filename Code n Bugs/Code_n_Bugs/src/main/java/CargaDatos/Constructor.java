@@ -15,18 +15,17 @@ import java.time.LocalTime;
  */
 public class Constructor {
      
-    public static final String USUARIO = "USUARIO";
-    public static final String CLIENTE = "CLIENTE";
+  
     //public static final String VEHICULO_PICKUP = "PICKUP";
 
     public static Object construirClases(String[] campos) {
         Object nuevoObjeto=null;
         switch (campos[0]) {
-            case USUARIO:
-                    nuevoObjeto= new Usuario(campos[0],campos[1],covertirEntero(campos[2]));
+            case "USUARIO":
+                    nuevoObjeto= new Usuario(campos[1],campos[2],covertirEntero(campos[3]));
                     
                 break;
-            case CLIENTE:
+            case "CLIENTE":
                    // vehiculo = new Pickup(campos[1],darFormatoAHora(campos[2]) ,darFormatoAHora(campos[3]) , darFormatoAFecha(campos[4]));
                 break;
             
@@ -53,4 +52,13 @@ public class Constructor {
         int valor =Integer.valueOf(campo);
         return valor;
     }
+    
+  
+    public static Usuario construirUsuario(String [] campos){
+        Usuario usuario=null;
+        usuario=new Usuario(campos[0],campos[1],covertirEntero(campos[3]));   
+        return usuario;
+    }
+    
+    
 }

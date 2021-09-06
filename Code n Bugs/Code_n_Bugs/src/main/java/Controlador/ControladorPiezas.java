@@ -68,10 +68,6 @@ public class ControladorPiezas extends HttpServlet {
             default:
                 
         }
-         
-          
-       
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -114,8 +110,8 @@ public class ControladorPiezas extends HttpServlet {
                    piezas=DB.verificar(tipo); 
                    if(piezas.getTipo().equals(tipo)){
 
-                         int piezastotal=piezas.getCanidad()+cantidad;
-                         double precioDB=piezas.getCanidad()*piezas.getPrecio();
+                         int piezastotal=piezas.getCantidad()+cantidad;
+                         double precioDB=piezas.getCantidad()*piezas.getPrecio();
                          double precionuevo=cantidad*precio;
                          double nuevoPrecio=(precioDB+precionuevo)/piezastotal;
                          Statement Update=Conexcion.getConecion().createStatement();
@@ -154,12 +150,7 @@ public class ControladorPiezas extends HttpServlet {
          }   
  
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         

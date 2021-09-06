@@ -1,0 +1,36 @@
+CREATE TABLE personal(
+usuario VARCHAR(30) NOT NULL,
+password VARCHAR(25) NOT NULL,
+tipo CHAR(5) NOT NULL,
+CONSTRAINT PK_PERSONAL PRIMARY KEY(usuario)
+);
+
+CREATE TABLE materia_prima(
+ cantidad   INT NOT NULL,
+ tipo_pieza VARCHAR(40) NOT NULL,
+ precio     DOUBLE NOT NULL,
+CONSTRAINT PK_MATERIA_PRIMA PRIMARY KEY(tipo_pieza)
+);
+
+CREATE TABLE mueble(
+nombre VARCHAR(40) NOT NULL,
+precio DOUBLE NOT NULL,
+CONSTRAINT PK_MUEBLE PRIMARY KEY(nombre)
+);
+
+CREATE TABLE emsamble_piezas(
+mueble VARCHAR(40) NOT NULL,
+pieza VARCHAR(40) NOT NULL,
+cantidad INT NOT  NULL,
+CONSTRAINT FK_TO_MUEBLE FOREIGN KEY(mueble) REFERENCES mueble(nombre),
+CONSTRAINT FK_TO_MATERIA_PRIMA FOREIGN KEY(pieza) REFERENCES materia_prima(tipo_pieza)
+);
+
+CREATE TABLE ensamble_muebles(
+id INT NOT NULL AUTO_INCREMENT,
+nombre_mueble VARCHAR(40) NOT NULL,
+usuario VARCHAR(40) NOT NULL,
+fecha DATE DEFAULT NULL,
+costo_fabricacion DOUBLE NOT NULL, 
+PRIMARY KEY (id)
+);

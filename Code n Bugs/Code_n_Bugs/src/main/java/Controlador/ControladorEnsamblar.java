@@ -98,8 +98,8 @@ public class ControladorEnsamblar extends HttpServlet {
                 como= ConsultarPiezas(info);
                // request.setAttribute("pita",como);
                 request.setAttribute("lista", info);
-                request.setAttribute("selec",mueble);
-                request.setAttribute("s",pieza);
+               // request.setAttribute("selec",mueble);
+               // request.setAttribute("s",pieza);
                 request.setAttribute("usuarioCrear", usu);
                 request.getRequestDispatcher("/AreaFabrica/EmsamblarMueble.jsp?valor="+usu).forward(request, response);
               

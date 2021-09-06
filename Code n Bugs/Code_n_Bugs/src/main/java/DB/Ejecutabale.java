@@ -29,17 +29,18 @@ public class Ejecutabale {
     public static void main(String args []) {
       
         
-            ArrayList<PiezasMadera> list; 
+           /* ArrayList<PiezasMadera> list; 
             PiezasMadera pieza=new PiezasMadera();
             GenericaDB<PiezasMadera> listaPiezas= new GenericaDB<PiezasMadera>();
             list= (ArrayList<PiezasMadera>) listaPiezas.selectRows("SELECT* FROM materia_prima", pieza.getClass(),"PIEZA");
              
-           
+           */
             
             
              
             
-            
+            System.out.println("El directorio temporal del sistema es "
+  + System.getProperty("java.io.tmpdir"));
             
             
             
@@ -76,7 +77,7 @@ public class Ejecutabale {
             //System.out.println(r);
        // } catch (Exception e) {
         //}
-            Usuario g=new Usuario();
+        /*    Usuario g=new Usuario();
             Object nueva;
             try {
             ConsultaGenericaDB<Usuario> tmp=new ConsultaGenericaDB<Usuario>();
@@ -88,7 +89,7 @@ public class Ejecutabale {
         } catch (Exception e) {
             System.out.println("perdio");
         }
-           
+           */
         }
     
       

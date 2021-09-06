@@ -57,4 +57,22 @@ public class UsuarioDB {
         return nuevo;
     }
     
+    public Usuario verificarExistencia(String usuario){
+        Usuario Usuarionuevo=new Usuario();
+        try {
+             Statement insert=Conexcion.getConecion().createStatement();
+            ResultSet rs = insert.executeQuery("SELECT * FROM personal WHERE usuario='"+usuario+"'");
+            while (rs.next()){
+                Usuarionuevo.setUsuario(rs.getString("usuario"));
+                Usuarionuevo.setContraseña(rs.getString("password"));
+                Usuarionuevo.setTipo(rs.getInt("tipo"));
+            }
+           rs.close();
+            
+        } catch (Exception e) {
+            
+        }
+           
+        return Usuarionuevo;
+    }
 }

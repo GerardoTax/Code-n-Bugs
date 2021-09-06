@@ -26,7 +26,7 @@ public class PiezaDB {
             while (rs.next()){
                 nuevot.setTipo(rs.getString("tipo_pieza"));
                 nuevot.setPrecio(rs.getDouble("precio"));
-                nuevot.setCanidad(rs.getInt("cantidad"));
+                nuevot.setCantidad(rs.getInt("cantidad"));
                      
             }
            rs.close();
